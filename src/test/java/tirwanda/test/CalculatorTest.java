@@ -5,6 +5,7 @@ import org.opentest4j.TestAbortedException;
 import tirwanda.test.generator.SimpleDisplayNameGenerator;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assumptions.*;
 
 //@DisplayName("Test For Calculator class")
 @DisplayNameGeneration(SimpleDisplayNameGenerator.class)
@@ -51,7 +52,7 @@ public class CalculatorTest {
     }
 
     @Test
-//    @DisplayName("Testing Scenario fail for method divide(Integer, Integer)")
+    // @DisplayName("Testing Scenario fail for method divide(Integer, Integer)")
     public void testDivideFail() {
         assertThrows(IllegalArgumentException.class, () -> calculator.divide(100, 0));
     }
@@ -68,5 +69,10 @@ public class CalculatorTest {
         if (!"DEV".equals(profile)) {
             throw new TestAbortedException("Test di batalkan karena bukan DEV");
         }
+    }
+
+    @Test
+    public void testAssumptions() {
+        assumeTrue("DEV".equals(System.getenv("PROFILE")));
     }
 }
